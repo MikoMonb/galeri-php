@@ -5,7 +5,7 @@
         $cari = $_GET['cari'];
         $sql = "SELECT * FROM foto WHERE fotoID LIKE '%$cari%' OR judulFoto LIKE '%$cari%' OR deskripsiFoto LIKE '%$cari%'";
     } else {
-        $sql = "SELECT * FROM foto";
+        $sql = "SELECT * FROM foto ORDER BY RAND()";
     }
 
     $result = $kon->query($sql);
