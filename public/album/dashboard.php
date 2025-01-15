@@ -48,10 +48,13 @@
                     <a href="view/view_album.php?id=<?php echo $albumID; ?>">
                         <img src="../../img/<?php echo $coverFoto; ?>" alt="Cover of <?php echo $row['albumID']; ?>" class="album-cover">
                         <div class="album-info">
-                            <h2><?php echo $row['albumID']; ?></h2>
-                            <p><strong>Nama Album:</strong> <?php echo $row['namaAlbum']; ?></p>
+                            <h2><?php echo $row['namaAlbum']; ?></h2>
                             <p><strong>Description:</strong> <?php echo $row['deskripsi']; ?></p>
                             <p><strong>Upload Date:</strong> <?php echo $row['tanggalDibuat']; ?></p>
+
+                            <div class="album-actions">
+                                <a href="update/update.php?id=<?php echo $albumID; ?>" class="album-btn album-btn-update">Update</a>
+                            </div>
                         </div>
                     </a>
                 </div>

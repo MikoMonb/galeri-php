@@ -49,6 +49,12 @@
                 navbar.classList.toggle("show");
             });
         });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const tanggalInput = document.getElementById('tanggalUnggah');
+            const today = new Date().toISOString().split('T')[0]; // Format ke 'YYYY-MM-DD'
+            tanggalInput.value = today;
+        });
     </script>
 </head>
 <body class="upload">
@@ -72,12 +78,12 @@
             </div>
             <div class="form-group">
                 <label for="deskripsiFoto" class="form-label">Deskripsi Foto:</label>
-                <textarea name="deskripsiFoto" id="deskripsiFoto" rows="4" required class="form-input"></textarea>
+                <textarea name="deskripsiFoto" id="deskripsiFoto" rows="4" class="form-input"></textarea>
             </div>
             <div class="form-group-row">
                 <div class="form-group-column">
                     <label for="tanggalUnggah" class="form-label">Tanggal Unggah:</label>
-                    <input type="date" name="tanggalUnggah" id="tanggalUnggah" required class="form-input" />
+                    <input type="date" name="tanggalUnggah" id="tanggalUnggah" required readonly class="form-input" />
                 </div>
                 <div class="form-group-column">
                     <label for="lokasiFile" class="form-label">Lokasi File:</label>

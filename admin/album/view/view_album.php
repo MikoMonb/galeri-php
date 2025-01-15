@@ -1,26 +1,43 @@
 <?php 
-    include_once("../../../config/config.php");
-    include_once("viewdata.php");
+include_once('../../../config/config.php');
+include_once('viewdata.php');
 
-    $fotoController = new FotoController($kon);
+$albumController = new AlbumController($kon);
 
-    $sql = "SELECT username FROM user WHERE userID = '$userID'";
-    $result = $kon->query($sql);
-    $username = $result->fetch_assoc()['username'];
+session_start();
 
-    $sql = "SELECT namaAlbum FROM album WHERE albumID = '$albumID'";
-    $result = $kon->query($sql);
-    $album = $result->fetch_assoc()['namaAlbum'];
+if (!isset($_SESSION["userID"])) {
+    header("Location: ../../login.php");
+    exit();
+}
 
-    $logStatus = isset($_SESSION["userID"]) ? true : false;
+$userID = $_SESSION["userID"]; 
+
+$sqlAlbum = "SELECT * FROM album WHERE albumID = '$id'";
+$resultAlbum = $kon->query($sqlAlbum);
+
+$sqlFoto = "SELECT fotoID, lokasiFile FROM foto WHERE albumID = '$id'";
+$resultFoto = $kon->query($sqlFoto);
+
+$logStatus = isset($_SESSION["userID"]) ? true : false;
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Photo</title>
-    <link rel="stylesheet" href="../../../css/style.css"> 
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="../../../css/style.css">
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const toggleButton = document.querySelector(".menu-toggle");
+            const navbar = document.querySelector(".navbar");
+
+            toggleButton.addEventListener("click", function () {
+                navbar.classList.toggle("show");
+            });
+        });
+    </script>
 </head>
 <body>
     <header class="header">
@@ -28,8 +45,8 @@
         <button class="menu-toggle">☰</button>
         <nav class="navbar">
             <a href="../../../dashboard.php">Home</a>
-            <a href="../tambah/tambah.php">Upload</a>
-            <a href="../../album/dashboard.php">Album</a>
+            <a href="../../photo/tambah/tambah.php">Upload</a>
+            <a href="../dashboard.php">Album</a>
             <?php if ($logStatus === true): ?>
                 <a href="logout.php">Logout</a>
             <?php else: ?>
@@ -38,27 +55,33 @@
         </nav>
     </header>
 
-    <main class="view">
-        <div class="view-container">
-            <div class="photo-container">
-                <?php if ($fotoData): ?>
-                    <img src="../../../img/<?php echo $lokasiFile; ?>" alt="<?php echo $judulFoto; ?>">
-                <?php else: ?>
-                    <p>Photo not found.</p>
-                <?php endif; ?>
-            </div>
-            <div class="info-container">
-                <?php if ($fotoData): ?>
-                    <h2><?php echo $judulFoto; ?></h2>
-                    <p><strong>Description:</strong> <?php echo $deskripsiFoto; ?></p>
-                    <p><strong>Album Name:</strong> <?php echo $album; ?></p>
-                    <p><strong>Upload Date:</strong> <?php echo $tanggalUnggah; ?></p>
-                    <p><strong>Uploader ID:</strong> <?php echo $username; ?></p>
-                <?php else: ?>
-                    <p>No details available for this photo.</p>
-                <?php endif; ?>
-            </div>
+    <div class="container">
+        <div class="box">
+            <div class="dream" id="dream1"></div>
+            <div class="dream" id="dream2"></div>
+            <div class="dream" id="dream3"></div>
+
+            <?php
+            $counter = 0;
+            if ($resultFoto->num_rows > 0) {
+                while ($row = $resultFoto->fetch_assoc()) {
+
+                    $image = $row['lokasiFile'];
+                    $imagePath = "../../../img/" . htmlspecialchars($image);
+                    $imageId = "image" . $counter;
+
+                    $targetDream = $counter % 3 === 0 ? "dream1" : ($counter % 3 === 1 ? "dream2" : "dream3");
+
+                    echo "<script>
+                        document.getElementById('$targetDream').innerHTML += 
+                        '<img src=\"" . $imagePath . "\" alt=\"Foto\" id=\"" . $imageId . "\" class=\"clickable\" onclick=\"window.location.href=\'../../photo/view/view.php?id=" . $row['fotoID'] . "\'\">';
+                    </script>";
+
+                    $counter++;
+                }
+            }
+            ?>
         </div>
-    </main>
+    </div>
 </body>
 </html>
