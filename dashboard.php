@@ -89,7 +89,4 @@
         </div>
     </div>
 </body>
-<footer class="footer">
-    <p>&copy; <?php echo date("Y"); ?> Photo Gallery. All rights reserved.</p>
-</footer>
 </html>
