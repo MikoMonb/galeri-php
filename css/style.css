@@ -674,17 +674,3 @@ body {
 .add-album-link {
     padding-top: 20px;
 }
-
-.footer {
-    background-color: transparent;
-    color: #black;
-    text-align: center;
-    padding: 10px 0;
-    position: relative;
-    bottom: 0;
-    width: 100%;
-    font-size: 14px;
-    font-weight: bold;
-    padding: 5px;
-    border-top: 3px solid #333;
-}
