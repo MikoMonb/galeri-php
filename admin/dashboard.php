@@ -58,7 +58,7 @@
             </form>
         </div>
         <nav class="navbar">
-            <a href="../public/photo/tambah/tambah.php">Upload</a>
+            <a href="account/dashboard.php">Users</a>
             <a href="album/dashboard.php">Album</a>
             <a href="../logout.php">Logout</a>
         </nav>

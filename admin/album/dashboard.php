@@ -28,7 +28,7 @@
                 navbar.classList.toggle("show");
             });
         });
-        
+
         function confirmDeletion(event, id) {
             const isConfirmed = confirm("Are you sure you want to delete this photo? This action cannot be undone.");
             if (!isConfirmed) {
@@ -44,7 +44,7 @@
 
         <nav class="navbar">
             <a href="../dashboard.php">Home</a>
-            <a href="../../public/photo/tambah/tambah.php">Upload</a>
+            <a href="../account/dashboard.php">Users</a>
             <a href="../../logout.php">Logout</a>
         </nav>
     </header>
@@ -77,7 +77,7 @@
 
                             <div class="album-actions">
                                 <a href="update/update.php?id=<?php echo $albumID; ?>" class="album-btn album-btn-update">Update</a>
-                                <a href="delete/delete.php?id=<?php echo $albumID; ?>" 
+                                <a href="album_hapus.php?id=<?php echo $albumID; ?>" 
                                     class="album-btn album-btn-delete"
                                     onclick="confirmDeletion(event, <?php echo $albumID; ?>)">Delete</a>
                             </div>
