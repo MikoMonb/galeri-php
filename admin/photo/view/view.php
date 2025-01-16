@@ -31,6 +31,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Photo</title>
     <link rel="stylesheet" href="../../../css/style.css">
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const toggleButton = document.querySelector(".menu-toggle");
+            const navbar = document.querySelector(".navbar");
+
+            toggleButton.addEventListener("click", function () {
+                navbar.classList.toggle("show");
+            });
+        });
+        
+        function confirmDeletion(event, id) {
+            const isConfirmed = confirm("Are you sure you want to delete this photo? This action cannot be undone.");
+            if (!isConfirmed) {
+                event.preventDefault();
+            }
+        }
+    </script>
 </head>
 <body>
     <header class="header">
@@ -38,7 +55,7 @@
         <button class="menu-toggle">☰</button>
         <nav class="navbar">
             <a href="../../../dashboard.php">Home</a>
-            <a href="../tambah/tambah.php">Upload</a>
+            <a href="../../account/dashboard.php">Users</a>
             <a href="../../album/dashboard.php">Album</a>
             <?php if ($logStatus === true): ?>
                 <a href="logout.php">Logout</a>
@@ -68,9 +85,8 @@
                     <p><strong>Likes :</strong> <?php echo $totalLikes; ?></p>
 
                     <div class="action-buttons">
-                        <?php if ($loggedInUserID === $userID): ?>
-                            <a href="../update/update.php?id=<?php echo $id; ?>" class="update-button">Update Photo</a>
-                        <?php endif; ?>
+                        <a href="../update/update.php?id=<?php echo $id; ?>" class="update-button">Update Photo</a>
+                        <a href="../foto_hapus.php?id=<?php echo $id; ?>" class="delete-button" onclick="confirmDeletion(event, <?php echo $id; ?>)">Delete Photo</a>
                     </div>
                 <?php else: ?>
                     <p>No details available for this photo.</p>
