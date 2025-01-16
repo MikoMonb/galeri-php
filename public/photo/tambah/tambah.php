@@ -52,7 +52,7 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             const tanggalInput = document.getElementById('tanggalUnggah');
-            const today = new Date().toISOString().split('T')[0]; // Format ke 'YYYY-MM-DD'
+            const today = new Date().toISOString().split('T')[0];
             tanggalInput.value = today;
         });
     </script>

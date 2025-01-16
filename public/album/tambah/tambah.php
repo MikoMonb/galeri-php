@@ -49,7 +49,7 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             const tanggalInput = document.getElementById('tanggalDibuat');
-            const today = new Date().toISOString().split('T')[0]; // Format ke 'YYYY-MM-DD'
+            const today = new Date().toISOString().split('T')[0];
             tanggalInput.value = today;
         });
     </script>
