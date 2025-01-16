@@ -49,6 +49,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Foto</title>
     <link rel="stylesheet" href="../../../css/style.css">
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const toggleButton = document.querySelector(".menu-toggle");
+            const navbar = document.querySelector(".navbar");
+
+            toggleButton.addEventListener("click", function () {
+                navbar.classList.toggle("show");
+            });
+        });
+    </script>
 </head>
 <body class="upload">
     <header class="header">

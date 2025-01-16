@@ -20,6 +20,15 @@
     <title>Your Albums</title>
     <link rel="stylesheet" href="../../css/style.css">
     <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const toggleButton = document.querySelector(".menu-toggle");
+            const navbar = document.querySelector(".navbar");
+
+            toggleButton.addEventListener("click", function () {
+                navbar.classList.toggle("show");
+            });
+        });
+        
         function confirmDeletion(event, id) {
             const isConfirmed = confirm("Are you sure you want to delete this photo? This action cannot be undone.");
             if (!isConfirmed) {
