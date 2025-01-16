@@ -13,6 +13,9 @@
             $row = mysqli_fetch_assoc($result);
             $lokasiFile = $row['lokasiFile'];
 
+            mysqli_query($this->kon, "DELETE FROM likefoto WHERE fotoID = '$id'");
+            mysqli_query($this->kon, "DELETE FROM komentarfoto WHERE fotoID = '$id'");
+
             $deletedata = mysqli_query($this->kon, "DELETE FROM foto WHERE fotoID = '$id'");
 
             if ($deletedata) {
